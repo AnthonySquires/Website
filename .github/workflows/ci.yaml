@@ -14,6 +14,9 @@ jobs:
   prepare-builder:
     name: Prepare Builder Container
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     outputs:
       image_name: ${{ steps.prepare-container.outputs.image_name }}
     steps:
@@ -24,6 +27,16 @@ jobs:
       - name: Prepare container
         id: prepare-container
         run: |
+          if [ -z "${UID}" ]; then
+              UID="$(id -u)"
+          fi
+          export UID
+
+          if [ -z "${GID}" ]; then
+              GID="$(id -g)"
+          fi
+          export GID
+
           task ci:prepare-docker-builder
 
   code-quality:

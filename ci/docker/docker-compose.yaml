@@ -1,0 +1,23 @@
+---
+services:
+  website-builder:
+    build:
+      context: ./website-builder
+      dockerfile: Dockerfile
+    image: ghcr.io/anthonysquires/website/builder:20250803211130
+    user: "${UID}:${GID}"
+    volumes:
+      - ./website-builder:/app
+    stdin_open: true
+    tty: true
+
+  website-tester:
+    build:
+      context: ./website-tester
+      dockerfile: Dockerfile
+    image: ghcr.io/anthonysquires/website/tester:20250803211127
+    user: "${UID}:${GID}"
+    volumes:
+      - ./website-tester:/app
+    stdin_open: true
+    tty: true

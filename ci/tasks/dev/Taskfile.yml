@@ -1,0 +1,12 @@
+---
+version: "3"
+
+tasks:
+  start:
+    desc: "Start development server"
+    preconditions:
+      - sh: which yarn >/dev/null 2>&1
+        msg: Missing "yarn". Please install yarn
+    cmds:
+      - yarn install
+      - yarn dev

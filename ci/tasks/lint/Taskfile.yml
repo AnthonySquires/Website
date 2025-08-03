@@ -1,0 +1,56 @@
+---
+version: "3"
+
+tasks:
+  yaml:
+    desc: Lint YAML files/schemas
+    cmds:
+      - task: yaml-lint
+      - task: yaml-schema
+  yaml-lint:
+    desc: Lint YAML files with yamllint
+    internal: true
+    preconditions:
+      - sh: which yamllint >/dev/null 2>&1
+        msg: Missing "yamllint". Please install yamllint
+    cmds:
+      - for: sources
+        cmd: |
+          yamllint --strict --config-file "{{.YAMLLINT_CONFIG}}" "{{.ITEM}}"
+    sources:
+      - '**/*.yml'
+      - '**/*.yaml'
+      - exclude: 'node_modules/**/*.yml'
+      - exclude: 'node_modules/**/*.yaml'
+    vars:
+      YAMLLINT_CONFIG: '{{.TASKFILE_DIR}}/yamllint.yml'
+  yaml-schema:
+    desc: Validate YAML files against schemas
+    internal: true
+    preconditions:
+      - sh: which check-jsonschema >/dev/null 2>&1
+        msg: Missing "check-jsonschema". Please install check-jsonschema
+    cmds:
+      - for:
+          var: TASKFILES
+        cmd: |
+          check-jsonschema --builtin-schema "vendor.taskfile" "{{.ITEM}}"
+      - for:
+          var: COMPOSES
+        cmd: |
+          check-jsonschema --builtin-schema "vendor.compose-spec" "{{.ITEM}}"
+      - for:
+          var: WORKFLOWS
+        cmd: |
+          check-jsonschema --builtin-schema "vendor.github-workflows" "{{.ITEM}}"
+    sources:
+      - '**/Taskfile.yml'
+      - '**/docker-compose.yaml'
+      - '.github/workflows/**.yaml'
+    vars:
+      COMPOSES:
+        sh: find "{{.ROOT_DIR}}" -type f -name 'docker-compose.yaml' -not -path node_modules
+      TASKFILES:
+        sh: find "{{.ROOT_DIR}}" -type f -name 'Taskfile.yml' -not -path node_modules
+      WORKFLOWS:
+        sh: find "{{.ROOT_DIR}}/.github/workflows" -type f -name '*.yaml'

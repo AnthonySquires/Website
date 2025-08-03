@@ -1,0 +1,23 @@
+---
+name: Code Quality
+
+on:  # yamllint disable-line rule:truthy
+  workflow_call:
+    inputs:
+      image_name:
+        required: true
+        type: string
+
+jobs:
+  lint-yaml:
+    name: Lint YAML
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ inputs.image_name }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - run: task lint:yaml

@@ -5,10 +5,11 @@ import LandingPage from './LandingPage';
 const materialTheme = createTheme({
   palette: {
     primary: {
-      main: '#00ffdb',
+      main: '#00ac9d',
+      contrastText: "#fff"
     },
     secondary: {
-      main: '#00a4ff',
+      main: '#0064ac',
     },
   },
   typography: {

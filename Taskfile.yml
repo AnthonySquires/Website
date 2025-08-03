@@ -1,0 +1,13 @@
+---
+version: "3"
+
+includes:
+  dev: './ci/tasks/dev'
+  ci: './ci/tasks/ci'
+  lint: './ci/tasks/lint'
+
+tasks:
+  default:
+    desc: List available commands
+    cmds:
+      - '{{.TASK_EXE}} --list-all'

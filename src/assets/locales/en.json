@@ -1,0 +1,60 @@
+{
+    "common":{
+        "name": "Anthony Squires"
+    },
+    "hero":{
+        "summary": "A Passionate and driven Software Developer with a focus on delivering reliable and scalable solutions. Experienced in full system development and edge AI deployments leading a team to build a diverse product portfolio filling everything from niche to enterprise deployments.",
+        "full-stack-tag": "Full-Stack Development",
+        "full-stack-desc": "Experienced in building full system solutions from hardware selection to OS development to web based management interfaces",
+        "problem-solving-tag": "Problem Solving",
+        "problem-solving-desc": "Solved challenging customer issues and architectural problems using 10+ years of professional experience",
+        "leadership-tag": "Leadership",
+        "leadership-desc": "Delivered multiple products from start to finish independently and leading the team, mediating between third party vendors, product management, and engineering teams"
+    },
+    "projects": {
+        "header": "Projects",
+        "github-link": "Source Code",
+        "no-projects": "No projects match the selected filter",
+        "project-website-title": "This website",
+        "project-website-desc": "The website you're looking at! Setup to demonstrate various skills and frameworks that I'm familiar with. While not a complete picture of all the work I can do it provides more insight into the breadth of my experience that isn't captured easily in a resume"
+    },
+    "skills": {
+        "header": "Skills",
+        "frameworks-title": "Frameworks & Environments",
+        "language-title": "Programming Languages",
+        "tools-title": "Tools & DevOps",
+        "no-skills": "No skills match the selected filter",
+        "action-professional-only": "Show skills with professional experience only (Highlighted)",
+        "framework-trt": "TensorRT",
+        "framework-react": "React",
+        "framework-boost": "Boost",
+        "framework-linux": "Linux Drivers",
+        "framework-wpf": "WPF (Windows UI)",
+        "framework-gtest": "GoogleTest",
+        "framework-pytest": "PyTest",
+        "framework-playwright": "PlayWright",
+        "framework-yocto": "Yocto Project",
+        "framework-esp32": "ESP32 (IDF)",
+        "framework-hass": "HomeAssistant",
+        "framework-docker": "Docker",
+        "lang-cpp": "C++",
+        "lang-c": "C",
+        "lang-javascript": "Typescript/Javascript",
+        "lang-go": "Go",
+        "lang-rust": "Rust",
+        "lang-java": "Java",
+        "lang-kotlin": "Kotlin",
+        "lang-csharp": "C#",
+        "lang-bash": "Bash/Shell",
+        "lang-python": "Python",
+        "tool-jira": "JIRA",
+        "tool-confluence": "Confluence",
+        "tool-github": "Github Actions & Issues",
+        "tool-azure": "Azure",
+        "tool-gitlab": "Gitlab CI & Issues",
+        "tool-bitbucket": "Bitbucket",
+        "tool-valgrind": "Valgrind",
+        "tool-vs": "Visual Studio (Code & Full)",
+        "tool-gdb": "GDB"
+    }
+}

@@ -1,0 +1,13 @@
+[
+    {
+        "title": "project-website-title",
+        "icon": "web",
+        "body": "project-website-desc",
+        "professional": false,
+        "tags": [
+            "taskfile",
+            "docker"
+        ],
+        "githubUrl": "https://github.com/AnthonySquires/Website"
+    }
+]

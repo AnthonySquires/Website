@@ -1,0 +1,35 @@
+---
+name: CI (Continuous Integration)
+
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  prepare-builder:
+    name: Prepare Builder Container
+    runs-on: ubuntu-latest
+    outputs:
+      image_name: ${{ steps.prepare-container.outputs.image_name }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Task
+        uses: arduino/setup-task@v2
+      - name: Prepare container
+        id: prepare-container
+        run: |
+          task ci:prepare-docker-builder
+
+  code-quality:
+    name: Code Quality
+    needs: prepare-builder
+    uses: ./.github/workflows/code-quality.yaml
+    with:
+      image_name: ${{ needs.prepare-builder.outputs.image_name }}
+    secrets: inherit

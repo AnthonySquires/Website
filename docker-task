@@ -1,0 +1,23 @@
+#!/bin/bash
+# Launch development tasks from inside the development docker container
+
+if [ -z "${UID}" ]; then
+    UID="$(id -u)"
+fi
+export UID
+
+if [ -z "${GID}" ]; then
+    GID="$(id -g)"
+fi
+export GID
+
+COMPOSE_FILE="ci/docker/docker-compose.yaml"
+BUILDER_SERVICE="website-builder"
+
+exec docker compose --file "${COMPOSE_FILE}" run \
+    --rm \
+    --interactive \
+    --volume "${PWD}:${PWD}:rw" \
+    --workdir "${PWD}" \
+    "${BUILDER_SERVICE}" \
+    task "$@"

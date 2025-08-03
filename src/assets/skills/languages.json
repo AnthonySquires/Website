@@ -1,0 +1,42 @@
+[
+    {
+        "key": "lang-cpp",
+        "professional": true
+    },
+    {
+        "key": "lang-c",
+        "professional": true
+    },
+    {
+        "key": "lang-python",
+        "professional": true
+    },
+    {
+        "key": "lang-bash",
+        "professional": true
+    },
+    {
+        "key": "lang-csharp",
+        "professional": true
+    },
+    {
+        "key": "lang-javascript",
+        "professional": true
+    },
+    {
+        "key": "lang-go",
+        "professional": true
+    },
+    {
+        "key": "lang-rust",
+        "professional": false
+    },
+    {
+        "key": "lang-java",
+        "professional": false
+    },
+    {
+        "key": "lang-kotlin",
+        "professional": false
+    }
+]

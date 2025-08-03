@@ -1,0 +1,50 @@
+[
+    {
+        "key": "framework-trt",
+        "professional": true
+    },
+    {
+        "key": "framework-docker",
+        "professional": true
+    },
+    {
+        "key": "framework-react",
+        "professional": true
+    },
+    {
+        "key": "framework-yocto",
+        "professional": true
+    },
+    {
+        "key": "framework-linux",
+        "professional": true
+    },
+    {
+        "key": "framework-boost",
+        "professional": true
+    },
+    {
+        "key": "framework-gtest",
+        "professional": true
+    },
+    {
+        "key": "framework-pytest",
+        "professional": true
+    },
+    {
+        "key": "framework-playwright",
+        "professional": true
+    },
+    {
+        "key": "framework-wpf",
+        "professional": true
+    },
+    {
+        "key": "framework-esp32",
+        "professional": false
+    },
+    {
+        "key": "framework-hass",
+        "professional": false
+    }
+]

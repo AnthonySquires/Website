@@ -1,0 +1,59 @@
+---
+version: "3"
+
+vars:
+  COMPOSE_FILE: '{{.ROOT_DIR}}/ci/docker/docker-compose.yaml'
+
+tasks:
+  prepare-docker-builder:
+    desc: Prepare Docker builder environment
+    summary: |
+      This task checks if the container exists, attempts to pull, then build, and pushes it.
+    cmds:
+      - task: prepare-container
+        vars:
+          SERVICE: 'website-builder'
+  prepare-container:
+    internal: true
+    preconditions:
+      - sh: which docker >/dev/null 2>&1
+        msg: Missing "docker". Please install Docker
+    cmds:
+      - |
+        image_name="$(
+          docker compose --file '{{.COMPOSE_FILE}}' \
+          config --images '{{.SERVICE}}' | head -1
+        )"
+        if [ -z "${image_name}" ]; then
+          echo "No image found for service '{{.SERVICE}}'."
+          exit 1
+        fi
+
+        if [ -n "${GITHUB_OUTPUT}" ]; then
+          # save the output for use with later workflows
+          echo "image_name=${image_name}" >> "${GITHUB_OUTPUT}"
+        fi
+
+        if docker image inspect "${image_name}" >/dev/null 2>&1; then
+          echo "Image '${image_name}' already exists. Not attempting to pull."
+          exit 0
+        fi
+
+        if docker compose --file '{{.COMPOSE_FILE}}' pull '{{.SERVICE}}'; then
+          echo "Successfully pulled image '${image_name}'. No need to push"
+          exit 0
+        fi
+
+        if ! docker compose --file '{{.COMPOSE_FILE}}' build '{{.SERVICE}}'; then
+          echo "Failed to build image for service '{{.SERVICE}}'."
+          exit 1
+        fi
+
+        if ! docker compose --file '{{.COMPOSE_FILE}}' push '{{.SERVICE}}'; then
+          echo "Failed to push image for service '{{.SERVICE}}'."
+          exit 1
+        fi
+    requires:
+      vars:
+        - COMPOSE_FILE
+        - SERVICE

@@ -1,0 +1,38 @@
+[
+    {
+        "key": "tool-jira",
+        "professional": true
+    },
+    {
+        "key": "tool-confluence",
+        "professional": true
+    },
+    {
+        "key": "tool-github",
+        "professional": true
+    },
+    {
+        "key": "tool-azure",
+        "professional": true
+    },
+    {
+        "key": "tool-bitbucket",
+        "professional": true
+    },
+    {
+        "key": "tool-valgrind",
+        "professional": true
+    },
+    {
+        "key": "tool-vs",
+        "professional": true
+    },
+    {
+        "key": "tool-gdb",
+        "professional": true
+    },
+    {
+        "key": "tool-gitlab",
+        "professional": false
+    }
+]

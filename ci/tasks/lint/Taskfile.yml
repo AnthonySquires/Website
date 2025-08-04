@@ -1,6 +1,11 @@
 ---
 version: "3"
 
+includes:
+  dev: 
+    taskfile: '../dev'
+    internal: true
+
 tasks:
   docker:
     desc: Lint Docker files
@@ -21,8 +26,9 @@ tasks:
     preconditions:
       - sh: which yarn >/dev/null 2>&1
         msg: Missing "yarn". Please install yarn or use the docker container
+    deps:
+      - dev:install-packages
     cmds:
-      - yarn install
       - yarn lint
     sources:
       - 'src/**/*.js'

@@ -1,14 +1,20 @@
 ---
 version: "3"
 
+includes:
+  dev: 
+    taskfile: '../dev'
+    internal: true
+
 tasks:
   build:
     desc: Build the production bundle
     preconditions:
       - sh: which yarn >/dev/null 2>&1
         msg: Missing "yarn". Please install yarn or use the docker container
+    deps:
+      - dev:install-packages
     cmds:
-      - yarn install
       - yarn build
     generates:
       - dist/**

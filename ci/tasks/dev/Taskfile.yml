@@ -7,6 +7,23 @@ tasks:
     preconditions:
       - sh: which yarn >/dev/null 2>&1
         msg: Missing "yarn". Please install yarn
+    deps:
+      - install-packages
     cmds:
-      - yarn install
       - yarn dev
+  install-packages:
+    desc: Install yarn packages
+    internal: true
+    preconditions:
+      - sh: which yarn >/dev/null 2>&1
+        msg: Missing "yarn". Please install yarn
+    cmds:
+      - echo "${YARN_CACHE_FOLDER}"
+      - yarn install
+    env:
+      CI: true
+    generates:
+      - node_modules/**
+    sources:
+      - 'package.json'
+      - 'yarn.lock'

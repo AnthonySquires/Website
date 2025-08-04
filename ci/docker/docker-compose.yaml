@@ -8,7 +8,7 @@ services:
     user: "${UID}:${GID}"
     environment:
       PYLINTHOME: /tmp/pylint
-      YARN_CACHE: /tmp/yarn
+      YARN_CACHE_FOLDER: /tmp/yarn
     stdin_open: true
     tty: true
 
@@ -18,5 +18,7 @@ services:
       dockerfile: Dockerfile
     image: ghcr.io/anthonysquires/website/tester:20250803211128
     user: "${UID}:${GID}"
+    environment:
+      PYLINTHOME: /tmp/pylint
     stdin_open: true
     tty: true

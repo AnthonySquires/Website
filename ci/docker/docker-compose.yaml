@@ -4,7 +4,7 @@ services:
     build:
       context: ./website-builder
       dockerfile: Dockerfile
-    image: ghcr.io/anthonysquires/website/builder:20250803211132
+    image: ghcr.io/anthonysquires/website/builder:20250803211133
     user: "${UID}:${GID}"
     environment:
       YARN_CACHE: /tmp/yarn

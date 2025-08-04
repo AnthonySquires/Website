@@ -6,6 +6,7 @@ includes:
   ci: './ci/tasks/ci'
   dev: './ci/tasks/dev'
   lint: './ci/tasks/lint'
+  test: './ci/tasks/test'
 
 tasks:
   default:

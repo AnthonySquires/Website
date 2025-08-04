@@ -7,5 +7,4 @@ i18n.addResourceBundle('en', 'skills', {
   'skill2': 'Skill Two',
   'skill3': 'Skill Three',
   'test-title': 'Test Title',
-  'no-skills': 'No skills found'
 }, true, true);

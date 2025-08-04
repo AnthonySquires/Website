@@ -21,11 +21,11 @@ describe('SkillBucket', () => {
     );
     
     // All skills should be visible
-    const skill1 = await findByRole('listitem', { name: /skill one/i });
+    const skill1 = await findByRole('listitem', { name: /skill one/ui });
     expect(skill1).toBeVisible();
-    const skill2 = await findByRole('listitem', { name: /skill two/i });
+    const skill2 = await findByRole('listitem', { name: /skill two/ui });
     expect(skill2).toBeVisible();
-    const skill3 = await findByRole('listitem', { name: /skill three/i });
+    const skill3 = await findByRole('listitem', { name: /skill three/ui });
     expect(skill3).toBeVisible();
   });
 
@@ -42,9 +42,9 @@ describe('SkillBucket', () => {
     const skills = await findAllByRole('listitem');
     expect(skills).toHaveLength(2);
 
-    const skill1 = await findByRole('listitem', { name: /skill one/i });
+    const skill1 = await findByRole('listitem', { name: /skill one/ui });
     expect(skill1).toBeVisible();
-    const skill3 = await findByRole('listitem', { name: /skill three/i });
+    const skill3 = await findByRole('listitem', { name: /skill three/ui });
     expect(skill3).toBeVisible();
   });
 });

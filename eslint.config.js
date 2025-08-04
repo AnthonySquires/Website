@@ -30,6 +30,12 @@ export default tseslint.config([
         'error',
         'declaration',
       ],
+      'max-lines-per-function': [
+        'error',
+        {
+          'max': 100, // fine, I'll admit I should probably break stuff up more
+        }
+      ],
       'no-inline-comments': 'off', // who doesn't want more comments
       'no-magic-numbers': [ // really, 0?
         'error',
@@ -51,6 +57,12 @@ export default tseslint.config([
         },
       ],
       'sort-imports': 'off',
+    },
+  },
+  {
+    files: ['**/*.test.{ts,tsx}'],
+    rules: {
+      'no-magic-numbers': 'off', // doesn't really serve a purpose when tests expect N items
     },
   },
 ]);

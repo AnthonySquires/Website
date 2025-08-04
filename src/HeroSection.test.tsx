@@ -9,7 +9,7 @@ describe('Hero Section', () => {
       <HeroSection />
     );
 
-    const heading = await findByRole('heading', { name: /anthony squires/i });
+    const heading = await findByRole('heading', { name: /anthony squires/ui });
     expect(heading).toBeVisible();
   });
 });

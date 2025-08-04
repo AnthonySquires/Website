@@ -9,6 +9,8 @@ tasks:
         msg: Missing "yarn". Please install yarn or use the docker container
     cmds:
       - yarn test
+    env:
+      CI: true
     sources:
       - 'src/**/*.js'
       - 'src/**/*.ts'

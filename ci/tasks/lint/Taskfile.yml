@@ -2,7 +2,7 @@
 version: "3"
 
 includes:
-  dev: 
+  dev:
     taskfile: '../dev'
     internal: true
 

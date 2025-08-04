@@ -31,8 +31,10 @@ jobs:
             echo "missing archive?" >&2
             exit 1
           fi
+          echo "Found archive: ${archive_name}"
 
           # extract to dist so that the e2e tests can be run like this or from a dev env
+          mkdir -p dist
           tar -C dist -xf "${archive_name}"
       - name: Run Tests
         run: task test:e2e

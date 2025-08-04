@@ -16,8 +16,10 @@ function SkillChip(props: SkillChipProps): ReactElement {
 
   return (
     <Chip
-      label={text}
       color={professional ? 'primary' : 'default'}
+      label={text}
+      aria-label={text}
+      role="listitem"
     />
   );
 }
@@ -61,10 +63,17 @@ export default function SkillBucket(props: SkillBucketProps): ReactElement {
 
   return (
     <Stack>
-      <Typography variant="subtitle1">
+      <Typography
+        id={`skills-${title}`}
+        variant="subtitle1"
+      >
         {t(title)}
       </Typography>
-      <Masonry columns={2}>
+      <Masonry
+        columns={2}
+        role="list"
+        aria-labelledby={`skills-${title}`}
+      >
         {filteredSkills.length === 0 ? (
           <Typography variant="body2">
             {t('no-skills')}

@@ -2,6 +2,35 @@
 version: "3"
 
 tasks:
+  docker:
+    desc: Lint Docker files
+    preconditions:
+      - sh: which hadolint >/dev/null 2>&1
+        msg: Missing "hadolint". Please install hadolint or use the docker container
+    cmds:
+      - for: sources
+        cmd: |
+          hadolint --config "{{.HADOLINT_CONFIG}}" "{{.ITEM}}"
+    sources:
+      - '**/Dockerfile'
+      - exclude: 'node_modules/**/Dockerfile'
+    vars:
+      HADOLINT_CONFIG: "{{.TASKFILE_DIR}}/hadolint.yaml"
+  javascript:
+    desc: Lint Javascript/Typescript files
+    preconditions:
+      - sh: which yarn >/dev/null 2>&1
+        msg: Missing "yarn". Please install yarn or use the docker container
+    cmds:
+      - yarn lint
+    sources:
+      - 'src/**/*.js'
+      - 'src/**/*.ts'
+      - 'src/**/*.tsx'
+      - 'eslint.config.js'
+      - 'package.json'
+      - 'tsconfig.json'
+      - 'vite-config.ts'
   yaml:
     desc: Lint YAML files/schemas
     cmds:

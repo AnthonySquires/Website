@@ -4,10 +4,10 @@ services:
     build:
       context: ./website-builder
       dockerfile: Dockerfile
-    image: ghcr.io/anthonysquires/website/builder:20250803211130
+    image: ghcr.io/anthonysquires/website/builder:20250803211132
     user: "${UID}:${GID}"
-    volumes:
-      - ./website-builder:/app
+    environment:
+      YARN_CACHE: /tmp/yarn
     stdin_open: true
     tty: true
 

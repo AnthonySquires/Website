@@ -11,6 +11,7 @@ interface HideOnScrollProps {
 
 function HideOnScroll(props: HideOnScrollProps) {
   const { children } = props;
+
   const trigger = useScrollTrigger({
     threshold: 400, // Adjust this value based on when you want the AppBar to appear
   });
@@ -39,7 +40,6 @@ export default function LandingPage(): ReactElement {
           </Toolbar>
         </AppBar>
       </HideOnScroll>
-      <Toolbar /> {/* This spacer prevents content from jumping under the AppBar when it appears */}
       <HeroSection />
       <SkillBuckets />
       <Projects />

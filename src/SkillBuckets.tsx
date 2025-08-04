@@ -8,6 +8,51 @@ import frameworks from './assets/skills/frameworks.json';
 import languages from './assets/skills/languages.json';
 import tools from './assets/skills/tools.json';
 
+interface SkillBucketsRowProps {
+  professionalOnly: boolean;
+}
+
+function SkillBucketsRow(props: SkillBucketsRowProps): ReactElement {
+  const {
+    professionalOnly,
+  } = props;
+
+  return (
+    <>
+      <Grid
+        size={{ xs: 12, md: 4 }} // eslint-disable-line sort-keys
+      > 
+        <SkillBucket
+          filter=""
+          professionalOnly={professionalOnly}
+          skills={languages}
+          title="language-title"
+        />
+      </Grid>
+      <Grid
+        size={{ xs: 12, md: 4 }} // eslint-disable-line sort-keys
+      >
+        <SkillBucket
+          filter=""
+          professionalOnly={professionalOnly}
+          skills={frameworks}
+          title="frameworks-title"
+        />
+      </Grid>
+      <Grid
+        size={{ xs: 12, md: 4 }} // eslint-disable-line sort-keys
+      >
+        <SkillBucket
+          filter=""
+          professionalOnly={professionalOnly}
+          skills={tools}
+          title="tools-title"
+        />
+      </Grid>
+    </>
+  );
+}
+
 export default function SkillBuckets(): ReactElement {
   const { t } = useTranslation('skills');
 
@@ -22,8 +67,8 @@ export default function SkillBuckets(): ReactElement {
       container
       spacing={2}
       sx={{
-        px: 4,
         mb: 4,
+        px: 4,
       }}
     >
       <Grid size={12}>
@@ -34,37 +79,19 @@ export default function SkillBuckets(): ReactElement {
       <Grid size={12}>
         <Stack direction="row">
           <FormControlLabel
-            control={<Switch />}
+            control={(
+              <Switch
+                checked={professionalOnly}
+                onChange={(ev) => { handleProfessionalOnlyChange(ev.target.checked) }}
+              />
+            )}
             label={t('action-professional-only')}
-            onChange={(ev) => handleProfessionalOnlyChange(ev.target.checked)}
-            value={professionalOnly}
           />
         </Stack>
       </Grid>
-      <Grid size={{ xs: 12, md: 4 }}>
-        <SkillBucket
-          filter=""
-          professionalOnly={professionalOnly}
-          skills={languages}
-          title="language-title"
-        />
-      </Grid>
-      <Grid size={{ xs: 12, md: 4 }}>
-        <SkillBucket
-          filter=""
-          professionalOnly={professionalOnly}
-          skills={frameworks}
-          title="frameworks-title"
-        />
-      </Grid>
-      <Grid size={{ xs: 12, md: 4 }}>
-        <SkillBucket
-          filter=""
-          professionalOnly={professionalOnly}
-          skills={tools}
-          title="tools-title"
-        />
-      </Grid>
+      <SkillBucketsRow
+        professionalOnly={professionalOnly}
+      />
     </Grid>
   );
 }

@@ -2,8 +2,9 @@
 version: "3"
 
 includes:
-  dev: './ci/tasks/dev'
+  build: './ci/tasks/build'
   ci: './ci/tasks/ci'
+  dev: './ci/tasks/dev'
   lint: './ci/tasks/lint'
 
 tasks:

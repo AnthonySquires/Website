@@ -45,6 +45,13 @@ jobs:
 
           task ci:prepare-docker-builder
 
+  build:
+    name: Build
+    needs: prepare-builder
+    uses: ./.github/workflows/build.yaml
+    with:
+      image_name: ${{ needs.prepare-builder.outputs.image_name }}
+    secrets: inherit
   code-quality:
     name: Code Quality
     needs: prepare-builder

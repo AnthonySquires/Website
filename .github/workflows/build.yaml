@@ -1,5 +1,5 @@
 ---
-name: Code Quality
+name: Build
 
 on:  # yamllint disable-line rule:truthy
   workflow_call:
@@ -9,8 +9,8 @@ on:  # yamllint disable-line rule:truthy
         type: string
 
 jobs:
-  lint-docker:
-    name: Lint Docker
+  build:
+    name: Build Package
     runs-on: ubuntu-latest
     container:
       image: ${{ inputs.image_name }}
@@ -20,9 +20,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - run: task lint:docker
-  lint-javascript:
-    name: Lint Javascript
+      - run: task build:package
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 'website'
+          path: './website.tar.zst'
+          if-no-files-found: error
+  unit-test:
+    name: Unit Test
     runs-on: ubuntu-latest
     container:
       image: ${{ inputs.image_name }}
@@ -32,16 +37,4 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - run: task lint:javascript
-  lint-yaml:
-    name: Lint YAML
-    runs-on: ubuntu-latest
-    container:
-      image: ${{ inputs.image_name }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.github_token }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - run: task lint:yaml
+      - run: task test:unit

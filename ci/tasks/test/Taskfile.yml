@@ -1,0 +1,19 @@
+---
+version: "3"
+
+tasks:
+  unit:
+    desc: Run unit tests
+    preconditions:
+      - sh: which yarn >/dev/null 2>&1
+        msg: Missing "yarn". Please install yarn or use the docker container
+    cmds:
+      - yarn test
+    sources:
+      - 'src/**/*.js'
+      - 'src/**/*.ts'
+      - 'src/**/*.tsx'
+      - 'eslint.config.js'
+      - 'package.json'
+      - 'tsconfig.json'
+      - 'vite-config.ts'

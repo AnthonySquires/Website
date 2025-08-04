@@ -1,12 +1,14 @@
-import { ThemeProvider, THEME_ID, createTheme } from '@mui/material/styles';
+import type { ReactElement } from 'react';
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline';
+import { THEME_ID, ThemeProvider, createTheme } from '@mui/material/styles';
+
 import LandingPage from './LandingPage';
 
 const materialTheme = createTheme({
   palette: {
     primary: {
+      contrastText: '#fff',
       main: '#00ac9d',
-      contrastText: "#fff"
     },
     secondary: {
       main: '#0064ac',
@@ -15,9 +17,9 @@ const materialTheme = createTheme({
   typography: {
     fontFamily: 'Inter,sans-serif',
   }
-});
+})
 
-function App() {
+function App(): ReactElement {
   return (
     <ScopedCssBaseline>
       <ThemeProvider theme={{ [THEME_ID]: materialTheme }}>
@@ -27,4 +29,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

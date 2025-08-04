@@ -32,7 +32,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - run: task lint:javascript
+      - run: /entrypoint.sh task lint:javascript
   lint-python:
     name: Lint Python
     runs-on: ubuntu-latest

@@ -8,6 +8,7 @@ tasks:
       - sh: which yarn >/dev/null 2>&1
         msg: Missing "yarn". Please install yarn or use the docker container
     cmds:
+      - yarn install
       - yarn build
     generates:
       - dist/**

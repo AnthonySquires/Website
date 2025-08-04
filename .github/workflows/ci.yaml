@@ -44,6 +44,39 @@ jobs:
           export GID
 
           task ci:prepare-docker-builder
+  prepare-tester:
+    name: Prepare Tester Container
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      image_name: ${{ steps.prepare-container.outputs.image_name }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Task
+        uses: arduino/setup-task@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Prepare container
+        id: prepare-container
+        run: |
+          if [ -z "${UID}" ]; then
+              UID="$(id -u)"
+          fi
+          export UID
+
+          if [ -z "${GID}" ]; then
+              GID="$(id -g)"
+          fi
+          export GID
+
+          task ci:prepare-docker-tester
 
   build:
     name: Build
@@ -58,4 +91,13 @@ jobs:
     uses: ./.github/workflows/code-quality.yaml
     with:
       image_name: ${{ needs.prepare-builder.outputs.image_name }}
+    secrets: inherit
+  test:
+    name: Test
+    needs:
+      - build
+      - prepare-tester
+    uses: ./.github/workflows/test.yaml
+    with:
+      image_name: ${{ needs.prepare-tester.outputs.image_name }}
     secrets: inherit

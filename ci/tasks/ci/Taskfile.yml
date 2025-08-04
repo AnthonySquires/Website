@@ -13,6 +13,14 @@ tasks:
       - task: prepare-container
         vars:
           SERVICE: 'website-builder'
+  prepare-docker-tester:
+    desc: Prepare Docker tester environment
+    summary: |
+      This task checks if the container exists, attempts to pull, then build, and pushes it.
+    cmds:
+      - task: prepare-container
+        vars:
+          SERVICE: 'website-tester'
   prepare-container:
     internal: true
     preconditions:

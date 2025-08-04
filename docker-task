@@ -12,12 +12,20 @@ fi
 export GID
 
 COMPOSE_FILE="ci/docker/docker-compose.yaml"
-BUILDER_SERVICE="website-builder"
+SERVICE_NAME="website-builder"
+
+# Check if test:e2e is in the arguments
+for arg in "$@"; do
+    if [ "$arg" = "test:e2e" ]; then
+        SERVICE_NAME="website-tester"
+        break
+    fi
+done
 
 exec docker compose --file "${COMPOSE_FILE}" run \
     --rm \
     --interactive \
     --volume "${PWD}:${PWD}:rw" \
     --workdir "${PWD}" \
-    "${BUILDER_SERVICE}" \
+    "${SERVICE_NAME}" \
     task "$@"

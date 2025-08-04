@@ -1,0 +1,11 @@
+[MESSAGES CONTROL]
+# Disable specific warnings
+disable=C0114, # I find this one kind of useless
+        W0621  # this gets triggered a lot in pytest. Ideally I'd mark every line on it's own but I'm lazy
+
+[FORMAT]
+# Maximum number of characters on a single line
+max-line-length=120
+
+# Expected format of line ending
+expected-line-ending-format=LF

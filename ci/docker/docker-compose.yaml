@@ -4,9 +4,10 @@ services:
     build:
       context: ./website-builder
       dockerfile: Dockerfile
-    image: ghcr.io/anthonysquires/website/builder:20250803211133
+    image: ghcr.io/anthonysquires/website/builder:20250803211135
     user: "${UID}:${GID}"
     environment:
+      PYLINTHOME: /tmp/pylint
       YARN_CACHE: /tmp/yarn
     stdin_open: true
     tty: true
@@ -15,9 +16,7 @@ services:
     build:
       context: ./website-tester
       dockerfile: Dockerfile
-    image: ghcr.io/anthonysquires/website/tester:20250803211127
+    image: ghcr.io/anthonysquires/website/tester:20250803211128
     user: "${UID}:${GID}"
-    volumes:
-      - ./website-tester:/app
     stdin_open: true
     tty: true

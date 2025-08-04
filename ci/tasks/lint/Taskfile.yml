@@ -31,6 +31,23 @@ tasks:
       - 'package.json'
       - 'tsconfig.json'
       - 'vite-config.ts'
+  python:
+    desc: Lint Python files
+    cmds:
+      - task: pylint
+  pylint:
+    desc: Run pylint
+    preconditions:
+      - sh: which pylint >/dev/null 2>&1
+        msg: Missing "pylint". Please install pylint or use the docker container
+    cmds:
+      - for: sources
+        cmd: pylint --rcfile "{{.RCFILE}}" "{{.ITEM}}"
+    sources:
+      - "{{.TEST_DIR}}/**/*.py"
+    vars:
+      RCFILE: "{{.TASKFILE_DIR}}/pylint.rc"
+      TEST_DIR: "{{.ROOT_DIR}}/test"
   yaml:
     desc: Lint YAML files/schemas
     cmds:

@@ -37,6 +37,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
+          github-token: ${{ secrets.GH_PAT }}
           name: 'website'
           run-id: ${{ steps.find-artifact.outputs.run_id }}
       - name: Extract Build

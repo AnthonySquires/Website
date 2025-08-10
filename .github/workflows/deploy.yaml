@@ -1,0 +1,49 @@
+---
+name: Deploy Pages
+
+on:  # yamllint disable-line rule:truthy
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find Artifact
+        id: find-artifact
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runs = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'ci.yaml',
+              status: 'success',
+              branch: 'main'
+            });
+            const run_id = runs.data.workflow_runs[0].id;
+            core.setOutput('run_id', run_id);
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          run-id: ${{ steps.find-artifact.outputs.run_id }}
+          name: 'website'
+      - name: Extract Build
+        run: |
+          archive_name="$(find . -name 'website.tar.*' -print -quit)"
+          if [ -z "${archive_name}" ]; then
+            echo "missing archive?" >&2
+            exit 1
+          fi
+          echo "Found archive: ${archive_name}"
+
+          # extract to dist so that the e2e tests can be run like this or from a dev env
+          mkdir -p dist
+          tar -C dist -xf "${archive_name}"
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=${{ vars.CLOUDFLARE_PROJECT_NAME }}
+          gitHubToken: ${{ secrets.github_token }}

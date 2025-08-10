@@ -2,11 +2,7 @@ import { Typography, Avatar, Box, Grid, List, ListItem, ListItemText, Stack, use
 import type { ReactElement } from 'react';
 import { useTranslation } from "react-i18next";
 
-export const heroPoints = [
-  ['full-stack-tag', 'full-stack-desc'],
-  ['problem-solving-tag', 'problem-solving-desc'],
-  ['leadership-tag', 'leadership-desc'],
-];
+import { heroPoints } from './constants';
 
 interface HeroPortraitProps {
   small?: boolean; 
@@ -60,8 +56,8 @@ function HeroSummary(): ReactElement {
         <Box
           sx={{
             display: {
-              xs: 'flex',
               md: 'none',
+              xs: 'flex',
             },
             justifyContent: 'center',
           }}
@@ -78,8 +74,8 @@ function HeroSummary(): ReactElement {
             key={tag}
             slotProps={{
               root: {
-                'aria-labelledby': `hero-point-${tag}`,
                 'aria-describedby': `hero-point-desc-${tag}`,
+                'aria-labelledby': `hero-point-${tag}`,
               },
             }}
           >
@@ -121,8 +117,8 @@ export default function HeroSection() {
         size={{ xs: 12, md: 5 }}  // eslint-disable-line sort-keys
         sx={{
           display: {
-            sm: 'none',
             md: 'flex',
+            sm: 'none',
           },
           justifyContent: 'center',
         }}

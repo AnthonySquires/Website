@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 
-import HeroSection, { heroPoints } from './HeroSection';
+import HeroSection from './HeroSection';
+import { heroPoints } from './constants';
 
 describe('Hero Section', () => {
   it('show display my name', async () => {
@@ -27,9 +28,9 @@ describe('Hero Section', () => {
       /leadership/ui,
     ];
 
-    for (const tagMatcher of expectedTags) {
+    await Promise.all(expectedTags.map(async (tagMatcher) => {
       const point = await findByRole('listitem', { name: tagMatcher });
       expect(point).toBeVisible();
-    }
+    }));
   });
 });

@@ -96,12 +96,16 @@ function ProjectCard(props: ProjectCardProps): ReactElement {
   const { t } = useTranslation('projects');
 
   return (
-    <Card>
+    <Card
+      aria-labelledby={`project-title-${title}`}
+      role="region"
+    >
       <CardHeader
         avatar={<ProjectIcon icon={icon} />}
         title={t(title)}
         slotProps={{
           title: {
+            id: `project-title-${title}`,
             variant: 'h5'
           },
         }}

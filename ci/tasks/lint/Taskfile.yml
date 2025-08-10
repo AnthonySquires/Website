@@ -19,6 +19,7 @@ tasks:
     sources:
       - '**/Dockerfile'
       - exclude: 'node_modules/**/Dockerfile'
+      - exclude: '.venv/**/*'
     vars:
       HADOLINT_CONFIG: "{{.TASKFILE_DIR}}/hadolint.yaml"
   javascript:
@@ -73,8 +74,8 @@ tasks:
     sources:
       - '**/*.yml'
       - '**/*.yaml'
-      - exclude: 'node_modules/**/*.yml'
-      - exclude: 'node_modules/**/*.yaml'
+      - exclude: 'node_modules/**/*'
+      - exclude: '.venv/**/*'
     vars:
       YAMLLINT_CONFIG: '{{.TASKFILE_DIR}}/yamllint.yml'
   yaml-schema:
@@ -101,9 +102,10 @@ tasks:
       - '**/docker-compose.yaml'
       - '.github/workflows/**.yaml'
     vars:
+      EXCLUDE_DIRS: -not -path node_modules -not -path .venv
       COMPOSES:
-        sh: find "{{.ROOT_DIR}}" -type f -name 'docker-compose.yaml' -not -path node_modules
+        sh: find "{{.ROOT_DIR}}" -type f -name 'docker-compose.yaml' {{.EXCLUDE_DIRS}}
       TASKFILES:
-        sh: find "{{.ROOT_DIR}}" -type f -name 'Taskfile.yml' -not -path node_modules
+        sh: find "{{.ROOT_DIR}}" -type f -name 'Taskfile.yml' {{.EXCLUDE_DIRS}}
       WORKFLOWS:
-        sh: find "{{.ROOT_DIR}}/.github/workflows" -type f -name '*.yaml'
+        sh: find "{{.ROOT_DIR}}/.github/workflows" -type f -name '*.yaml' {{.EXCLUDE_DIRS}}

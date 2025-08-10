@@ -62,7 +62,11 @@ export default function SkillBucket(props: SkillBucketProps): ReactElement {
   ), [translatedSkills, filter, professionalOnly]);
 
   return (
-    <Stack>
+    <Stack
+      aria-hidden={false}
+      aria-labelledby={`skills-${title}`}
+      role="region"
+    >
       <Typography
         id={`skills-${title}`}
         variant="subtitle1"
@@ -72,7 +76,7 @@ export default function SkillBucket(props: SkillBucketProps): ReactElement {
       <Masonry
         columns={2}
         role="list"
-        aria-labelledby={`skills-${title}`}
+        aria-describedby={`skills-${title}`}
       >
         {filteredSkills.length === 0 ? (
           <Typography variant="body2">

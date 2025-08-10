@@ -4,7 +4,7 @@ services:
     build:
       context: ./website-builder
       dockerfile: Dockerfile
-    image: ghcr.io/anthonysquires/website/builder:20250803211135
+    image: ghcr.io/anthonysquires/website/builder:20250803211137
     user: "${UID}:${GID}"
     environment:
       PYLINTHOME: /tmp/pylint

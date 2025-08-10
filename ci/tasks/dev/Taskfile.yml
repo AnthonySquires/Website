@@ -1,6 +1,19 @@
 ---
 version: "3"
 
+vars:
+  BUILDER_REQUIREMENTS: '{{.ROOT_DIR}}/ci/docker/website-builder/requirements.txt'
+  VENV_DIR: '{{.ROOT_DIR}}/.venv'
+  PYEXE:
+    sh: |
+      if which python3 >/dev/null 2>&1; then
+        echo python3 && exit 0
+      fi
+      if which python >/dev/null 2>&1; then
+        echo python && exit 0
+      fi
+      exit 1
+
 tasks:
   start:
     desc: "Start development server"
@@ -11,6 +24,17 @@ tasks:
       - install-packages
     cmds:
       - yarn dev
+  setup-venv:
+    desc: "Set up Python virtual environment"
+    cmds:
+      - |
+        if [ ! -d "{{.VENV_DIR}}" ]; then
+          "{{.PYEXE}}" -m venv "{{.VENV_DIR}}"
+        fi
+      - |
+        . "{{.VENV_DIR}}/bin/activate"
+        "{{.PYEXE}}" -m pip install -r "{{.BUILDER_REQUIREMENTS}}"
+        playwright install chromium
   install-packages:
     desc: Install yarn packages
     internal: true

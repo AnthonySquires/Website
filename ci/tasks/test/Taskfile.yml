@@ -2,6 +2,9 @@
 version: "3"
 
 includes:
+  build:
+    taskfile: '../build'
+    internal: true
   dev:
     taskfile: '../dev'
     internal: true
@@ -33,7 +36,16 @@ tasks:
         msg: Missing "pytest". Please install pytest or use the docker container
       - sh: which playwright >/dev/null 2>&1
         msg: Missing "playwright". Please install playwright or use the docker container
+    deps:
+      - build:build
     cmds:
-      - pytest "{{.ROOT_DIR}}/test"
+      - pytest -s "{{.ROOT_DIR}}/test" {{.CLI_ARGS}}
     env:
       CI: true
+      PWDEBUG: '{{if eq .DEBUG "1"}}1{{else}}0{{end}}'
+    sources:
+      - test/**/*.py
+      - test/pytest.ini
+    vars:
+      DEBUG: '0'
+      LOG_ARGS:

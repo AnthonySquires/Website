@@ -24,13 +24,14 @@ jobs:
               status: 'success',
               branch: 'main'
             });
+            console.log('Artifacts:', artifacts.data.artifacts.map(a => a.name));
             const run_id = runs.data.workflow_runs[0].id;
             core.setOutput('run_id', run_id);
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          run-id: ${{ steps.find-artifact.outputs.run_id }}
           name: 'website'
+          run-id: ${{ steps.find-artifact.outputs.run_id }}
       - name: Extract Build
         run: |
           archive_name="$(find . -name 'website.tar.*' -print -quit)"

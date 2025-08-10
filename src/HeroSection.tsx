@@ -118,7 +118,7 @@ export default function HeroSection() {
         sx={{
           display: {
             md: 'flex',
-            sm: 'none',
+            xs: 'none',
           },
           justifyContent: 'center',
         }}

@@ -33,6 +33,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       - run: /entrypoint.sh task lint:javascript
+  lint-json:
+    name: Lint JSON
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ inputs.image_name }}
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.github_token }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - run: /entrypoint.sh task lint:json
   lint-python:
     name: Lint Python
     runs-on: ubuntu-latest

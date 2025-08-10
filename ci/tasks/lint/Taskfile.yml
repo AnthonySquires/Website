@@ -39,6 +39,36 @@ tasks:
       - 'package.json'
       - 'tsconfig.json'
       - 'vite-config.ts'
+  json:
+    desc: 'Check JSON schemas'
+    cmds:
+      - for:
+          var: SCHEMAS
+        cmd: |
+          check-jsonschema --check-metaschema "{{.ITEM}}"
+      - for:
+          var: PROJECT_LISTS
+        cmd: |
+          check-jsonschema --schemafile "{{.PROJECTS_SCHEMA}}" "{{.ITEM}}"
+      - for:
+          var: SKILL_LISTS
+        cmd: |
+          check-jsonschema --schemafile "{{.SKILLS_SCHEMA}}" "{{.ITEM}}"
+    sources:
+      - "{{.ROOT_DIR}}/src/assets/projects/*.json"
+      - "{{.ROOT_DIR}}/src/assets/skills/*.json"
+      - "{{.PROJECTS_SCHEMA}}"
+      - "{{.SKILLS_SCHEMA}}"
+    vars:
+      PROJECTS_SCHEMA: "{{.TASKFILE_DIR}}/projects.schema.json"
+      SKILLS_SCHEMA: "{{.TASKFILE_DIR}}/skills.schema.json"
+      SCHEMAS:
+        - "{{.PROJECTS_SCHEMA}}"
+        - "{{.SKILLS_SCHEMA}}"
+      PROJECT_LISTS:
+        sh: find "{{.ROOT_DIR}}/src/assets/projects" -type f -name '*.json'
+      SKILL_LISTS:
+        sh: find "{{.ROOT_DIR}}/src/assets/skills" -type f -name '*.json'
   python:
     desc: Lint Python files
     cmds:

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anthonysquires.ca/skills.schema.json",
+  "description": "A list of skills for skills buckets",
+  "title": "Skills",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "title": {
+        "type": "string",
+        "description": "A translation key for the title of the project",
+        "minLength": 1
+      },
+      "icon": {
+        "description": "Icon to display",
+        "enum": [
+          "web"
+        ]
+      },
+      "body": {
+        "type": "string",
+        "description": "A translation key for the body text",
+        "minLength": 1
+      },
+      "professional": {
+        "type": "boolean",
+        "description": "True if the skill has been used professionally"
+      },
+      "githubUrl": {
+        "type": "string",
+        "format": "uri",
+        "description": "A link to the public github source code for a project"
+      }
+    },
+    "required": [
+      "title",
+      "icon",
+      "body",
+      "professional"
+    ]
+  }
+}

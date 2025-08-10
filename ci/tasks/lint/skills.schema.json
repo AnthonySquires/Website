@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://anthonysquires.ca/skills.schema.json",
+  "description": "A list of skills for skills buckets",
+  "title": "Skills",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "key": {
+        "type": "string",
+        "description": "A translation key for the skill",
+        "minLength": 1
+      },
+      "professional": {
+        "type": "boolean",
+        "description": "True if the skill has been used professionally"
+      }
+    },
+    "required": ["key", "professional"]
+  }
+}

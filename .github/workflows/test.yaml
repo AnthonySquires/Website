@@ -37,4 +37,4 @@ jobs:
           mkdir -p dist
           tar -C dist -xf "${archive_name}"
       - name: Run Tests
-        run: task test:e2e-ci  # ignore the deps that are normally included 
+        run: task test:e2e-ci  # ignore the deps that are normally included

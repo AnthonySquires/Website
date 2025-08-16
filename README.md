@@ -1,6 +1,6 @@
 # My website
 
-A basic resume/CV website to deomnstrate varisous skills and other things.
+A basic resume/CV website to demonstrate various skills and other things.
 
 ## To deploy
 

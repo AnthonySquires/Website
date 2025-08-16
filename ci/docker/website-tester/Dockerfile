@@ -23,7 +23,7 @@ RUN --mount=type=bind,target=/requirements.txt,source=requirements.txt \
     pip3 install --no-cache-dir --break-system-packages -r /requirements.txt
 
 ENV PLAYWRIGHT_BROWSERS_PATH=/opt/playwright
-RUN playwright install --with-deps chromium \
+RUN playwright install --with-deps chromium firefox webkit \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

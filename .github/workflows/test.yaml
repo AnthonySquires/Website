@@ -12,6 +12,9 @@ jobs:
   e2e-test:
     name: End to End Test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chromium, firefox, webkit]
     container:
       image: ${{ inputs.image_name }}
       credentials:
@@ -37,4 +40,5 @@ jobs:
           mkdir -p dist
           tar -C dist -xf "${archive_name}"
       - name: Run Tests
-        run: task test:e2e-ci  # ignore the deps that are normally included
+        # ignore the deps that are normally included
+        run: task BROWSER=${{ matrix.browser }} test:e2e-ci
